@@ -2,7 +2,7 @@
 
     <!-- ロゴ -->
     <div class="header__logo">
-        <a href="/"><img src="{{ asset('img/logo.png') }}" alt="ロゴ"></a>
+        <a href="/"><img src="{{ asset('img/logo.svg') }}" alt="ロゴ"></a>
     </div>
 
     @if( !in_array(Route::currentRouteName(), ['register', 'login', 'verification.notice']) )
