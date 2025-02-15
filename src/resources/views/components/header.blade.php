@@ -6,7 +6,7 @@
     </div>
 
     @if( !in_array(Route::currentRouteName(), ['register', 'login', 'verification.notice']) )
-    <!-- 検索フォーム -->
+    <!--現在のルートに[]内の文字列がが含まれていなければ検索フォームを表示するという意味 -->
     <form class="header_search" action="/" method="get">
         @csrf
         <input id="inputElement" class="header_search--input" type="text" name="search" placeholder="なにをお探しですか？">

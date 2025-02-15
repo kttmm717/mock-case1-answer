@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Item;
+use App\Models\Category;
+use App\Models\Condition;
+use App\Models\CategoryItem;
+use App\Http\Requests\ItemRequest;
+use Illuminate\Support\Facades\Storage;
 
 class ItemController extends Controller
 {
@@ -41,5 +46,40 @@ class ItemController extends Controller
 
         return view('index', compact('items', 'tab', 'search'));
         //商品一覧、現在のタブ、検索キーワードをビューに渡す
+    }
+
+    public function detail(Item $item) { //モデル結合ルート
+        return view('detail', compact('item'));
+    }
+
+    public function sellView() {
+        $categories = Category::all();
+        $conditions = Condition::all();
+        return view('sell', compact('categories', 'conditions'));
+    }
+
+    public function sellCreate(ItemRequest $request) {
+        $img = $request->file('img_url');
+        $img_url = Storage::disk('local')->put('public/img', $img);
+        //Storage::disc('local')はstorage/appという意味
+        //storage/app/public/imgに$imgを保存
+
+        $item = Item::create([
+            'name' => $request->name,
+            'price' => $request->price,
+            'description' => $request->description,
+            'img_url' => $img_url,
+            'condition_id' => $request->condition_id,
+            'user_id' => Auth::id() 
+        ]);
+
+        // カテゴリーはitemsテーブルではなく中間テーブルなのでforeachで別で保存
+        foreach($request->categories as $category_id) {
+            CategoryItem::create([
+                'item_id' => $item->id,
+                'category_id' => $category_id
+            ]);
+        }
+        return redirect()->route('item.detail', ['item'=>$item->id]);
     }
 }
