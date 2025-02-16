@@ -21,7 +21,10 @@ class PurchaseController extends Controller
     public function purchase($item_id, Request $request) {
         $item = Item::find($item_id);
         $stripe = new StripeClient(config('stripe.stripe_secret_key'));
+        //StripeClientのインスタンスを作成
+        //config/stripe.phpのstripe_secret_key の値を取得
 
+        //Stripeに送るデータを整理
         [
             $user_id,
             $amount,
@@ -61,6 +64,7 @@ class PurchaseController extends Controller
         ]);
 
         return redirect($checkout_session->url);
+        //ユーザーをStripeの決済ページへ自動的に移動させる
     }
 
     public function success($item_id, Request $request) {

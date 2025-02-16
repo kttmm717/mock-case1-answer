@@ -38,7 +38,8 @@ class User extends Authenticatable
      *
      * @var array<string, string>
      */
-    protected $casts = [
+    //datetimeにキャストすることでCarbonインスタンスとして扱えるようになる
+    protected $casts = [ 
         'email_verified_at' => 'datetime',
     ];
 
@@ -54,4 +55,7 @@ class User extends Authenticatable
         return $this->hasMany(Item::class);
     }
 
+    public function comments() {
+        return $this->hasMany(Comment::class);
+    }
 }
