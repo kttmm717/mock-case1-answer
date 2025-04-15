@@ -12,6 +12,12 @@
     align-items: center;
 }
 
+.item__img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 .sold{
     position: relative;
 }

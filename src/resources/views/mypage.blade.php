@@ -15,9 +15,9 @@
         <div class="user__info">
             <div class="user__img">
                 @if(isset($user->profile->img_url))
-                    <img class="user__icon" src="{{ \Storage::url($user->profile->img_url) }}" alt="">
+                <img class="user__icon" src="{{ \Storage::url($user->profile->img_url) }}" alt="">
                 @else
-                    <img id="myImage" class="user__icon" src="{{ asset('img/icon.png') }}" alt="">
+                <img id="myImage" class="user__icon" src="{{ asset('img/icon.png') }}" alt="">
                 @endif
             </div>
             <p class="user__name">{{$user->name}}</p>
@@ -39,13 +39,13 @@
         <div class="item">
             <a href="/item/{{$item->id}}">
                 @if($item->sold())
-                    <div class="item__img--container sold">
-                        <img src="{{ \Storage::url($item->img_url) }}" alt="商品画像">
-                    </div>
+                <div class="item__img--container sold">
+                    <img class="item__img" src="{{ \Storage::url($item->img_url) }}" alt="商品画像">
+                </div>
                 @else
-                    <div class="item__img--container">
-                        <img src="{{ \Storage::url($item->img_url) }}" alt="商品画像">
-                    </div>
+                <div class="item__img--container">
+                    <img class="item__img" src="{{ \Storage::url($item->img_url) }}" alt="商品画像">
+                </div>
                 @endif
             </a>
             <p class="item__name">{{$item->name}}</p>
