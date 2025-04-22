@@ -31,5 +31,14 @@ class UserTableSeeder extends Seeder
             'password' => Hash::make('password')
         ];
         User::create($param);
+
+        $param = [
+            'name' => '一般ユーザー3',
+            'email' => 'general3@gmail.com',
+            'email_verified_at' => Carbon::now(),
+            'password' => Hash::make('password')
+        ];
+        User::create($param);
+
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSoldItemsTable extends Migration
+class CreateMessagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreateSoldItemsTable extends Migration
      */
     public function up()
     {
-        Schema::create('sold_items', function (Blueprint $table) {
+        Schema::create('messages', function (Blueprint $table) {
             $table->id();
             $table->foreignId('item_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->string('sending_postcode');
-            $table->string('sending_address');
-            $table->string('sending_building')->nullable();
-            $table->boolean('transaction_completed')->default(false);
+            $table->foreignId('myself_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('partner_id')->constrained('users')->cascadeOnDelete();
+            $table->text('message');
+            $table->string('img_url')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +31,6 @@ class CreateSoldItemsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sold_items');
+        Schema::dropIfExists('messages');
     }
 }

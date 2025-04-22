@@ -63,6 +63,26 @@ class UserController extends Controller
             $items = SoldItem::where('user_id', $user->id)->get()->map(function ($sold_item) {
                 return $sold_item->item;
             });
+        }elseif($request->page == 'deal') {
+            $buyerItems = SoldItem::where('user_id', $user->id)
+                            ->where('transaction_completed', false)
+                            ->with('item.user')
+                            ->get()
+                            ->map(function ($sold_item) {
+                                return $sold_item->item;
+                            });
+                            
+            $sellerItems = SoldItem::whereHas('item.user', function ($query) use ($user) {
+                $query->where('id', $user->id);
+            })
+                ->where('transaction_completed', false)
+                ->with('item.user')
+                ->get()
+                ->map(function ($soldItem) {
+                    return $soldItem->item;
+                });
+
+            $items = $buyerItems->merge($sellerItems);
         }else {
             $items = Item::where('user_id', $user->id)->get();
         }

@@ -31,20 +31,25 @@
         <ul class="border__list">
             <li><a href="/mypage?page=sell">出品した商品</a></li>
             <li><a href="/mypage?page=buy">購入した商品</a></li>
+            <li><a href="/mypage?page=deal">取引中の商品</a></li>
         </ul>
     </div>
 
     <div class="items">
         @foreach($items as $item)
         <div class="item">
+            @if(request('page') === 'deal')
+            <a href="/deal/{{$item->id}}">
+            @else
             <a href="/item/{{$item->id}}">
-                @if($item->sold())
+            @endif
+                @if($item->sold() && request('page') === 'sell')
                 <div class="item__img--container sold">
-                    <img class="item__img" src="{{ \Storage::url($item->img_url) }}" alt="商品画像">
+                    <img class="item__img" src="{{\Storage::url($item->img_url)}}" alt="商品画像">
                 </div>
                 @else
                 <div class="item__img--container">
-                    <img class="item__img" src="{{ \Storage::url($item->img_url) }}" alt="商品画像">
+                    <img class="item__img" src="{{\Storage::url($item->img_url)}}" alt="商品画像">
                 </div>
                 @endif
             </a>
