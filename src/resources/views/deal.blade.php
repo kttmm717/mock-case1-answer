@@ -15,9 +15,36 @@
                 <img src="{{asset('img/icon.png')}}" alt="">
                 <h1>{{$partner->name}}さんとの取引画面</h1>
             </div>
+            @if($buyer->user_id === $user->id)
             <div>
-                <a href="">取引を完了する</a>
+                <a href="#" class="review__show">取引を完了する</a>
             </div>
+            @endif
+        </div>
+
+        <div class="review__modal {{$buyer->buyer_reviewed ? 'show' : 'hidden'}}">
+            @if($buyer->user_id === $user->id)
+            <form class="review__modal--form" action="/buyer/review/{{$partner->id}}/{{$user->id}}/{{$item->id}}" method="post">
+                @elseif($buyer->user_id !== $user->id)
+                <form class="review__modal--form" action="/seller/review/{{$partner->id}}/{{$user->id}}/{{$item->id}}" method="post">
+                    @endif
+                    @csrf
+                    <div class="review__title">
+                        <h2>取引が完了しました。</h2>
+                    </div>
+                    <div class="review__content">
+                        <p>今回の取引相手はどうでしたか？</p>
+                        <div id="star-rating" class="star__area">
+                            @for($i=1; $i<=5; $i++)
+                                <i class="fa-solid fa-star star" data-value="{{$i}}"></i>
+                                @endfor
+                        </div>
+                        <input type="hidden" name="rating" id="rating-input">
+                    </div>
+                    <div class="review__btn">
+                        <button>送信する</button>
+                    </div>
+                </form>
         </div>
 
         <div class="item__info fixed">
@@ -93,9 +120,11 @@
 
     <aside fixed>
         <h2>その他の取引</h2>
-        <a href="">商品名</a>
-        <a href="">商品名</a>
-        <a href="">商品名</a>
+        @foreach($otherDeals as $otherDeal)
+        <a href="{{route('deal.index', $otherDeal->item->id)}}">{{$otherDeal->item->name}}</a>
+        @endforeach
     </aside>
 </div>
+
+<script src="{{asset('js/review.js')}}"></script>
 @endsection

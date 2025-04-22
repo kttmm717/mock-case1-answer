@@ -39,8 +39,10 @@ Route::middleware(['auth', 'verified'])->group(function() {
     Route::get('/mypage', [UserController::class, 'mypage']);
     Route::get('/mypage/profile', [UserController::class, 'profile']);
     Route::post('/mypage/profile', [UserController::class, 'updateProfile']);
-    Route::get('deal/{item_id}', [DealController::class, 'index']);
+    Route::get('deal/{item_id}', [DealController::class, 'index'])->name('deal.index');
     Route::post('send/{item_id}/{myself_id}/{partner_id}', [DealController::class, 'send']);
+    Route::post('buyer/review/{partner_id}/{user_id}/{item_id}', [DealController::class, 'buyerCreateReview']);
+    Route::post('seller/review/{partner_id}/{user_id}/{item_id}', [DealController::class, 'sellerCreateReview']);
 });
 
 Route::post('login', [AuthenticatedSessionController::class, 'store'])->middleware('email');

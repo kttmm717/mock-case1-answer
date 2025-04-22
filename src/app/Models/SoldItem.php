@@ -13,13 +13,7 @@ class SoldItem extends Model
 
     public $incrementing = false;
 
-    protected $fillable = [
-        'item_id',
-        'user_id',
-        'sending_postcode',
-        'sending_address',
-        'sending_building'
-    ];
+    protected $guarded = ['id'];
 
     public function user() {
         return $this->belongsTo(User::class);

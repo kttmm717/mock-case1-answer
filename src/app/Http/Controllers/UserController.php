@@ -65,7 +65,7 @@ class UserController extends Controller
             });
         }elseif($request->page == 'deal') {
             $buyerItems = SoldItem::where('user_id', $user->id)
-                            ->where('transaction_completed', false)
+                            ->where('buyer_reviewed', false)
                             ->with('item.user')
                             ->get()
                             ->map(function ($sold_item) {

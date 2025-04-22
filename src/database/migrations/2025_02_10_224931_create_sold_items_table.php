@@ -20,6 +20,8 @@ class CreateSoldItemsTable extends Migration
             $table->string('sending_postcode');
             $table->string('sending_address');
             $table->string('sending_building')->nullable();
+            $table->boolean('buyer_reviewed')->default(false);
+            $table->boolean('seller_reviewed')->default(false);
             $table->boolean('transaction_completed')->default(false);
             $table->timestamps();
         });
