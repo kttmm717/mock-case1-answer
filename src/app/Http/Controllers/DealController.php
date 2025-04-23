@@ -108,4 +108,17 @@ class DealController extends Controller
 
         return redirect('/')->with('flashSuccess', '購入者を評価して取引が完了しました！');
     }
+
+    public function destory($message_id) {
+        $message = Message::find($message_id);
+        $message->delete();
+        return back();
+    }
+    public function update(Request $request, $message_id) {
+        $message = Message::find($message_id);
+        $message->update([
+            'message' => $request->message,
+        ]);
+        return back();
+    }
 }

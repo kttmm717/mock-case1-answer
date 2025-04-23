@@ -13,9 +13,9 @@
 
 <div class="border">
     <ul class="border__list">
-        <li><a href="{{ route('items.list', ['tab'=>'recommend', 'search'=>$search]) }}">おすすめ</a></li>
+        <li><a class="list {{request('tab') === 'recommend' ? 'active' : ''}}" href="{{ route('items.list', ['tab'=>'recommend', 'search'=>$search]) }}">おすすめ</a></li>
         @if(!auth()->guest())<!-- ゲストじゃない場合マイリスト表示 -->
-        <li><a href="{{ route('items.list', ['tab'=>'mylist', 'search'=>$search]) }}">マイリスト</a></li>
+        <li class="list {{request('tab') === 'mylist' ? 'active' : ''}}"><a href="{{ route('items.list', ['tab'=>'mylist', 'search'=>$search]) }}">マイリスト</a></li>
         @endif
     </ul>
 </div>

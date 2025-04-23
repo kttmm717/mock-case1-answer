@@ -10,6 +10,9 @@ use App\Http\Requests\ProfileRequest;
 use Illuminate\Support\Facades\Storage;
 use App\Models\SoldItem;
 use App\Models\Item;
+use App\Models\Review;
+use App\Models\Message;
+use Illuminate\Support\Facades\DB;
 
 
 class UserController extends Controller
@@ -86,7 +89,20 @@ class UserController extends Controller
         }else {
             $items = Item::where('user_id', $user->id)->get();
         }
-        return view('mypage', compact('user', 'items'));
+
+        $averageRating = Review::where('reviewee_id', $user->id)->avg('rating');
+        $averageRatingRound = round($averageRating);
+
+        $unreadCounts = Message::select('item_id', DB::raw('count(*) as unread_count'))
+                            ->where('partner_id', $user->id)
+                            ->where('is_read', false)
+                            ->groupBy('item_id')
+                            ->get();
+        $totalUnreadCount = Message::where('partner_id', $user->id)
+                                ->where('is_read', false)
+                                ->count();
+
+        return view('mypage', compact('user', 'items', 'averageRatingRound', 'unreadCounts', 'totalUnreadCount'));
     }
 }
 

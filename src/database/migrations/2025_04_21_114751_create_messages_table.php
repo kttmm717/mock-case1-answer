@@ -20,6 +20,7 @@ class CreateMessagesTable extends Migration
             $table->foreignId('partner_id')->constrained('users')->cascadeOnDelete();
             $table->text('message');
             $table->string('img_url')->nullable();
+            $table->boolean('is_read')->default(false);
             $table->timestamps();
         });
     }

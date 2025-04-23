@@ -75,22 +75,36 @@
                 @endif
             </div>
             @else
-            <div class="myself">
+            <div class="myself" data-message-id="{{$message->id}}">
                 <div class="user__info">
                     <img src="{{asset('img/icon.png')}}">
                     <span>{{$message->myself->name}}</span>
                 </div>
-                <div>
-                    <p>{{$message->message}}</p>
+
+                <div class="message__body">
+                    <p class="message__text">{{$message->message}}</p>
+                    <form class="edit__form" action="/message/update/{{$message->id}}" method="POST" style="display: none;">
+                        @csrf
+                        @method('patch')
+                        <textarea class="message__edit" name="message">{{ $message->message }}</textarea>
+                        <button type="submit">更新</button>
+                    </form>
                 </div>
+
                 @if(!empty($message->img_url))
                 <div class="send__img">
                     <img src="{{\Storage::url($message->img_url)}}">
                 </div>
                 @endif
-                <div>
-                    <a class="edit" href="">編集</a>
-                    <a class="delete" href="">削除</a>
+                <div class="myself__btn">
+                    <div>
+                        <button class="edit__toggle">編集</button>
+                    </div>
+                    <form action="/message/delete/{{$message->id}}" method="post">
+                        @csrf
+                        @method('delete')
+                        <button>削除</button>
+                    </form>
                 </div>
             </div>
             @endif
@@ -104,14 +118,14 @@
             @error('img_url')
             <p class="error">{{$message}}</p>
             @enderror
-            <form action="/send/{{$item->id}}/{{$user->id}}/{{$partner->id}}" method="post" enctype="multipart/form-data">
+            <form class="send__form" action="/send/{{$item->id}}/{{$user->id}}/{{$partner->id}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <input class="send__message" type="text" name="message" placeholder="取引メッセージを記入してください">
                 <label>
                     <input class="input__label" name="img_url" type="file" accept="image/png, image/jpeg">
                     画像を追加
                 </label>
-                <button type="submit">
+                <button class="send__btn" type="submit">
                     <img src="{{\Storage::url('img/send.jpg')}}" alt="送信">
                 </button>
             </form>
@@ -126,5 +140,5 @@
     </aside>
 </div>
 
-<script src="{{asset('js/review.js')}}"></script>
+<script src="{{asset('js/deal.js')}}"></script>
 @endsection

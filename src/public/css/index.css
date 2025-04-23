@@ -68,6 +68,48 @@
     font-weight: bold;
 }
 
+.list.active {
+    color: #FF0000;
+}
+
+.count {
+    position: relative;
+}
+
+.badge {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    z-index: 100;
+    width: 25px;
+    height: 25px;
+    background-color: #FF0000;
+    border-radius: 50%;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.border__list li:last-child {
+    position: relative;
+}
+
+.total__badge {
+    position: absolute;
+    top: 30%;
+    right: 0;
+    z-index: 100;
+    width: 25px;
+    height: 25px;
+    background-color: #FF0000;
+    border-radius: 50%;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 @media (min-width: 768px) and (max-width: 850px) {
     .item__img--container {
         width: 25vw;

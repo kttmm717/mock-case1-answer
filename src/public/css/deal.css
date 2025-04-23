@@ -112,6 +112,14 @@ aside {
     justify-content: end;
     flex-direction: row-reverse;
 }
+.myself__btn {
+    display: flex;
+    justify-content: flex-end;
+}
+.myself__btn button {
+    font-size: 0.6rem;
+    margin-left: 20px;
+}
 .edit,
 .delete {
     font-size: 0.5rem;
@@ -245,4 +253,13 @@ aside a {
 }
 .review__modal.show {
     display: block;
+}
+.message__edit {
+    background-color: #D9D9D9;
+    width: 100%;
+    padding: 10px;
+    text-align: left;
+    font-size: 0.5rem;
+    border-radius: 4px;
+    resize: none;
 }
