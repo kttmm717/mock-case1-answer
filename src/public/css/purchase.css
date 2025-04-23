@@ -8,7 +8,7 @@
 }
 
 .buy__right{
-    width: fit-content;
+    width: 45%;
 }
 
 .item{
@@ -65,7 +65,8 @@
 }
 
 .purchase__value{
-    padding: 40px 50px;
+    margin-top: 10px;
+    padding: 10px;
 }
 
 .input_destination{
@@ -84,30 +85,35 @@
 }
 
 .buy__info table{
-    width: 450px;
+    width: 100%;
     margin-bottom: 60px;
 }
 
 .buy__info tr{
     border: 1px solid #5F5F5F;
+    height: 100px;
 }
 
 .buy__info th, .buy__info td{
     width: 50%;
-    height: 100px;
-    padding: 50px;
+    line-height: 100px;
+    text-align: center;
 }
 
-@media (min-width: 768px) and (max-width: 850px) {
+.btn {
+    width: 100%;
+}
+
+@media(max-width: 768px) {
+    .buy__left {
+        width: 100%;
+    }
+
     .buy__right {
-        width: 45%;
+        width: 100%;
     }
 
     .buy__info table {
-        width: 100%;
-    }
-    
-    #purchase_btn {
         width: 100%;
     }
 
@@ -115,5 +121,13 @@
     .table__data{
         padding: unset !important;
         vertical-align: middle;
+    }
+
+    .buy__info table {
+        margin-top: 60px;
+    }
+
+    .buy {
+        flex-direction: column;
     }
 }

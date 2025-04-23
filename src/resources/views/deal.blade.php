@@ -140,7 +140,7 @@
     </main>
 
     <!-- サイドバー -->
-    <aside fixed>
+    <aside class="aside" fixed>
         <h2>その他の取引</h2>
         @foreach($otherDeals as $otherDeal)
         <a href="{{route('deal.index', $otherDeal->item->id)}}">{{$otherDeal->item->name}}</a>

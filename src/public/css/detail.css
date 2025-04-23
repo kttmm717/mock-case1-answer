@@ -46,8 +46,7 @@
 
 .item__info{
     width: 450px;
-    height: 75vh;
-    overflow-y: scroll;
+    height: 75vh;  
 }
 
 .item__info::-webkit-scrollbar{
@@ -187,13 +186,14 @@
     margin-top: 30px;
 }
 
-@media (min-width: 768px) and (max-width: 850px) {
+@media(max-width: 800px) {
     .item__img {
-        width: 45vw;
+        width: 100%;
+        margin: 40px 0;
     }
     
     .item__info {
-        width: 45vw;
+        width: 100%;        
     }
 
     .item__purchase,
@@ -203,5 +203,17 @@
 
     .comment__form-textarea {
         width: 100%;
+    }
+
+    .comment {
+        margin-bottom: 30px;
+    }
+
+    .item {
+        flex-direction: column;
+    }
+
+    .comment__form-btn {
+        margin-bottom: 50px;
     }
 }

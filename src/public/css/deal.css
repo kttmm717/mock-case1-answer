@@ -11,7 +11,7 @@ main {
     width: 85%;
     position: relative;
 }
-aside {
+.aside {
     width: 15%;
     background-color: #868686;
     color: #FFFFFF;
@@ -131,8 +131,9 @@ aside {
     position: absolute;
     bottom: 0;
     right: 0;
-    z-index: 20;
+    z-index: 30;
     padding: 1% 2%;
+    background-color: white;
 }
 .send form {
     width: 100%;
@@ -162,16 +163,16 @@ aside {
     border-radius: 10px;
     margin: 0 10px;
 }
-aside {
+.aside {
     text-align: center;   
     padding: 1% 2%;
     display: flex;
     flex-direction: column;
 }
-aside h2 {
+.aside h2 {
     margin-bottom: 40px;
 }
-aside a {
+.aside a {
     margin-bottom: 20px;
     background-color: #FFFFFF;
     color: black;
@@ -262,4 +263,16 @@ aside a {
     font-size: 0.5rem;
     border-radius: 4px;
     resize: none;
+}
+
+@media (min-width: 768px) and (max-width: 850px) {
+    .aside h2 {
+        font-size: 0.875rem;
+    }
+    .aside a {
+        font-size: 0.5rem;
+    }
+    .send label {
+        font-size: 0.725rem;
+    }
 }
