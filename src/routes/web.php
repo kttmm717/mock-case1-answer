@@ -45,6 +45,7 @@ Route::middleware(['auth', 'verified'])->group(function() {
     Route::post('seller/review/{partner_id}/{user_id}/{item_id}', [DealController::class, 'sellerCreateReview']);
     Route::patch('message/update/{message_id}', [DealController::class, 'update']);
     Route::delete('message/delete/{message_id}', [DealController::class, 'destory']);
+    Route::post('/messages/read/{message_id}', [DealController::class, 'markAsRead']);
 });
 
 Route::post('login', [AuthenticatedSessionController::class, 'store'])->middleware('email');

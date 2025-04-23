@@ -38,7 +38,12 @@
         <ul class="border__list">
             <li><a class="list {{request('page') === 'sell' ? 'active' : ''}}" href="/mypage?page=sell">出品した商品</a></li>
             <li><a class="list {{request('page') === 'buy' ? 'active' : ''}}" href="/mypage?page=buy">購入した商品</a></li>
-            <li><a class="list {{request('page') === 'deal' ? 'active' : ''}}" href="/mypage?page=deal">取引中の商品</a><span class="total__badge">{{$totalUnreadCount}}</span></li>
+            <li>
+                <a class="list {{request('page') === 'deal' ? 'active' : ''}}" href="/mypage?page=deal">取引中の商品</a>
+                @if(!empty($totalUnreadCount))
+                <span class="total__badge">{{$totalUnreadCount}}</span>
+                @endif
+            </li>
         </ul>
     </div>
 

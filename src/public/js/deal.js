@@ -1,4 +1,10 @@
 $(function () {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
     //モーダル開く
     $('.review__show').on('click', function () {
         $('.review__modal').show();
@@ -52,5 +58,21 @@ $(function () {
         e.preventDefault();
         localStorage.removeItem('message');
         $('.send__form').submit();
+    });
+
+    //ページ読み込み時に既読
+    $('.partner').each(function () {
+        const messageId = $(this).data('message-id');
+        
+        $.ajax({
+            url: "/messages/read/" + messageId,
+            method: 'post',
+            success: function () {
+                console.log(`メッセージ${messageId}を既読にしました`);
+            },
+            error: function () {
+                console.log(`メッセージ${messageId}が既読に失敗しました`);
+            }
+        });
     });
 });

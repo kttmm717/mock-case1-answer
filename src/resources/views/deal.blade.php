@@ -10,6 +10,7 @@
 @include('components.header')
 <div class="wrapper">
     <main>
+        <!-- トップ -->
         <div class="top fixed">
             <div class="top__partner--info">
                 <img src="{{asset('img/icon.png')}}" alt="">
@@ -22,6 +23,7 @@
             @endif
         </div>
 
+        <!-- モーダル -->
         <div class="review__modal {{$buyer->buyer_reviewed ? 'show' : 'hidden'}}">
             @if($buyer->user_id === $user->id)
             <form class="review__modal--form" action="/buyer/review/{{$partner->id}}/{{$user->id}}/{{$item->id}}" method="post">
@@ -47,6 +49,7 @@
                 </form>
         </div>
 
+        <!-- アイテム情報 -->
         <div class="item__info fixed">
             <div>
                 <img src="{{\Storage::url($item->img_url)}}" alt="商品画像">
@@ -57,10 +60,12 @@
             </div>
         </div>
 
+        <!-- メッセージ内容 -->
         <div class="message">
             @foreach($messages as $message)
+            <!-- 相手側メッセージ -->
             @if($message->myself_id !== $user->id)
-            <div class="partner">
+            <div class="partner" data-message-id="{{$message->id}}">
                 <div class="user__info">
                     <img src="{{asset('img/icon.png')}}">
                     <span>{{$message->myself->name}}</span>
@@ -75,6 +80,7 @@
                 @endif
             </div>
             @else
+            <!-- 自分側メッセージ -->
             <div class="myself" data-message-id="{{$message->id}}">
                 <div class="user__info">
                     <img src="{{asset('img/icon.png')}}">
@@ -111,6 +117,7 @@
             @endforeach
         </div>
 
+        <!-- メッセージ入力欄 -->
         <div class="send fixed">
             @error('message')
             <p class="error">{{$message}}</p>
@@ -132,6 +139,7 @@
         </div>
     </main>
 
+    <!-- サイドバー -->
     <aside fixed>
         <h2>その他の取引</h2>
         @foreach($otherDeals as $otherDeal)

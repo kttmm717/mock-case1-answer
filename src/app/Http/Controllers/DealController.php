@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Http\Requests\MessageRequest;
 use App\Models\SoldItem;
 use App\Models\Review;
+use App\Notifications\SellerReviewedNotification;
 
 class DealController extends Controller
 {
@@ -49,7 +50,7 @@ class DealController extends Controller
         }
 
         $otherDeals = SoldItem::where('user_id', $user->id)
-                            ->where('transaction_completed', false)
+                            ->where('buyer_reviewed', false)
                             ->where('item_id', '!=', $item->id)
                             ->get();
 
@@ -89,6 +90,10 @@ class DealController extends Controller
         $soldItem->update([
             'buyer_reviewed' => true,
         ]);
+
+        $partner = User::find($partner_id);
+        $item = Item::find($item_id);
+        $partner->notify(new SellerReviewedNotification($item->name, $request->rating));
         
         return redirect('/')->with('flashSuccess', '出品者を評価しました！');
     }
@@ -120,5 +125,16 @@ class DealController extends Controller
             'message' => $request->message,
         ]);
         return back();
+    }
+
+    public function markAsRead($message_id) {
+        $message = Message::findOrFail($message_id);
+        if($message && $message->partner_id == auth()->id() && !$message->is_read) {
+            $message->update([
+                'is_read' => true,
+            ]);
+            return response()->json(['status' => 'ok']);
+        }
+        return response()->json(['status' => 'not_found_or_forbidden'], 403);
     }
 }
