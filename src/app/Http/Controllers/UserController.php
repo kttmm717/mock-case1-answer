@@ -85,7 +85,10 @@ class UserController extends Controller
                     return $soldItem->item;
                 });
 
-            $items = $buyerItems->merge($sellerItems);
+            $items = $buyerItems->merge($sellerItems)
+                ->sortByDesc(function($item) {
+                    return optional($item->messages->sortByDesc('created')->first())->created_at;
+                });
         }else {
             $items = Item::where('user_id', $user->id)->get();
         }

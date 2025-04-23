@@ -35,6 +35,9 @@ class Item extends Model
     public function comments() {
         return $this->hasMany(Comment::class);
     }
+    public function messages() {
+        return $this->hasMany(Message::class);
+    }
 
     // メソッド定義
     public function categories() {

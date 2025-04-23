@@ -49,10 +49,13 @@ class DealController extends Controller
             }
         }
 
-        $otherDeals = SoldItem::where('user_id', $user->id)
-                            ->where('buyer_reviewed', false)
-                            ->where('item_id', '!=', $item->id)
-                            ->get();
+        $otherDeals = SoldItem::where(function($query) use ($user, $partner) {
+            $query->where('user_id', $user->id)
+                ->orWhere('user_id', $partner->id);
+        })
+        ->where('buyer_reviewed', false)
+        ->where('item_id', '!=', $item->id)
+        ->get();
 
         return view('deal', compact('item', 'formattedPrice', 'user', 'messages', 'partner', 'buyer', 'otherDeals'));
     }

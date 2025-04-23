@@ -127,7 +127,7 @@
             @enderror
             <form class="send__form" action="/send/{{$item->id}}/{{$user->id}}/{{$partner->id}}" method="post" enctype="multipart/form-data">
                 @csrf
-                <input class="send__message" type="text" name="message" placeholder="取引メッセージを記入してください">
+                <input class="send__message" type="text" name="message" placeholder="取引メッセージを記入してください" data-item-id="{{$item->id}}" data-user-id="{{$user->id}}">
                 <label>
                     <input class="input__label" name="img_url" type="file" accept="image/png, image/jpeg">
                     画像を追加

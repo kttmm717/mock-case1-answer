@@ -45,18 +45,21 @@ $(function () {
 
     //メッセージ入力内容保持
     const $input = $('.send__message');
+    const itemId = $input.data('item-id');
+    const userId = $input.data('user-id');
+    const messageKey = `message_${itemId}_${userId}`;
 
-    const saveMessage = localStorage.getItem('message');
+    const saveMessage = localStorage.getItem(messageKey);
     if (saveMessage) {
         $input.val(saveMessage);
     }
     $input.on('input', function () {
-        localStorage.setItem('message', $(this).val()); 
+        localStorage.setItem(messageKey, $(this).val()); 
     });
 
     $('.send__btn').on('click', function (e) {
         e.preventDefault();
-        localStorage.removeItem('message');
+        localStorage.removeItem(messageKey);
         $('.send__form').submit();
     });
 
