@@ -24,10 +24,17 @@
     padding: 1% 2%;
     position: relative;
 }
-.top img {
+.partner__img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.partner__icon {
     width: 45px;
     height: 40px;
     border-radius: 50%;
+    margin-right: 10px;
 }
 .top__partner--info {
     display: flex;
@@ -72,9 +79,15 @@
     display: flex;
     flex-direction: column;
 }
-.user__info img {
+.user__info--img {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+.user__info--icon {
     width: 23px;
     height: 20px;
+    border-radius: 50%;
 }
 .send__img img {
     width: 100%;

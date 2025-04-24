@@ -13,7 +13,11 @@
         <!-- トップ -->
         <div class="top fixed">
             <div class="top__partner--info">
-                <img src="{{asset('img/icon.png')}}" alt="">
+                @if(isset($partner->profile->img_url))
+                <img class="partner__img" src="{{\Storage::url($partner->profile->img_url)}}" alt="">
+                @else
+                <img class="partner__icon" src="{{asset('img/icon.png')}}" alt="">
+                @endif
                 <h1>{{$partner->name}}さんとの取引画面</h1>
             </div>
             @if($buyer->user_id === $user->id)
@@ -67,7 +71,11 @@
             @if($message->myself_id !== $user->id)
             <div class="partner" data-message-id="{{$message->id}}">
                 <div class="user__info">
-                    <img src="{{asset('img/icon.png')}}">
+                    @if(isset($partner->profile->img_url))
+                    <img class="user__info--img" src="{{\Storage::url($partner->profile->img_url)}}" alt="">
+                    @else
+                    <img class="user__info--icon" src="{{asset('img/icon.png')}}">
+                    @endif
                     <span>{{$message->myself->name}}</span>
                 </div>
                 <div>
@@ -83,7 +91,11 @@
             <!-- 自分側メッセージ -->
             <div class="myself" data-message-id="{{$message->id}}">
                 <div class="user__info">
-                    <img src="{{asset('img/icon.png')}}">
+                    @if(isset($user->profile->img_url))
+                    <img class="user__info--img" src="{{\Storage::url($user->profile->img_url)}}" alt="">
+                    @else
+                    <img class="user__info--icon" src="{{asset('img/icon.png')}}">
+                    @endif
                     <span>{{$message->myself->name}}</span>
                 </div>
 
