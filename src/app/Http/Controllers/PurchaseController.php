@@ -21,10 +21,7 @@ class PurchaseController extends Controller
     public function purchase($item_id, Request $request) {
         $item = Item::find($item_id);
         $stripe = new StripeClient(config('stripe.stripe_secret_key'));
-        //StripeClientのインスタンスを作成
-        //config/stripe.phpのstripe_secret_key の値を取得
 
-        //Stripeに送るデータを整理
         [
             $user_id,
             $amount,
@@ -37,10 +34,8 @@ class PurchaseController extends Controller
             $request->destination_postcode,
             urlencode($request->destination_address),
             urlencode($request->destination_building) ?? null
-            //外部サービス（今回はstripe）に送るので日本語をエンコードする必要がある
         ];
 
-        //Stripeで決済を行うには、Checkoutセッションを作成する必要がある！
         $checkout_session = $stripe->checkout->sessions->create([
             'payment_method_types' => [$request->payment_method],
             'payment_method_options' => [
@@ -60,11 +55,9 @@ class PurchaseController extends Controller
             ],
             'mode' => 'payment',
             'success_url' => "http://localhost/purchase/{$item_id}/success?user_id={$user_id}&amount={$amount}&sending_postcode={$sending_postcode}&sending_address={$sending_address}&sending_building={$sending_building}",
-            //クエリパラメータに購入データを付けて送っている　　　　　　　　　　→ここからクエリパラメータ
         ]);
 
         return redirect($checkout_session->url);
-        //ユーザーをStripeの決済ページへ自動的に移動させる
     }
 
     public function success($item_id, Request $request) {
@@ -74,11 +67,10 @@ class PurchaseController extends Controller
 
         $stripe = new StripeClient(config('stripe.stripe_secret_key'));
 
-        //クレジットカード決済を行う処理、以下3つの情報が必須
         $stripe->charges->create([
-            'amount' => $request->amount, //支払い金額
-            'currency' => 'jpy',          //使用する通貨（日本円はjpy）
-            'source' => 'tok_visa'        //支払い方法（テスト環境はtok_visa、本番環境は$request->token等）
+            'amount' => $request->amount,
+            'currency' => 'jpy',
+            'source' => 'tok_visa'
         ]);
 
         SoldItem::create([

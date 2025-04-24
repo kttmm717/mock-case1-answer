@@ -27,13 +27,9 @@
 
             <div class="item__form">
                 <form action="{{ $item->liked() ? '/item/unlike/'.$item->id : '/item/like/'.$item->id  }}" method="post" class="item__like" id="like__form">
-                <!-- $item->liked()がtrueのとき/item/unlike/、falseのとき/item/like/へ行く -->
-                <!-- 文字列と変数なのでドットで繋いでいる、'/item/unlike/5'このように変換される --> 
                     @csrf
                     <button>
                         <i class="fa-2xl fa-heart {{ $item->liked() ? 'fa-sharp fa-solid' : 'fa-regular' }}"></i>
-                        <!-- $item->liked()がtrueのときfa-sharp fa-solid（塗りつぶしアイコン） -->
-                        <!-- $item->liked()がfalseのときfa-regular（輪郭のみアイコン） -->
                     </button>
                     <p class="like__count">{{$item->likeCount()}}</p>
                 </form>
@@ -45,10 +41,7 @@
 
             @if($item->sold())
             <a href="#" class="btn item__purchase disable" disabled>売り切れました</a>
-            <!-- href="#"はリンクを無効化するためのHTML -->
-            <!-- disableはボタンをグレーアウトしたり、クリックできないように設定するためのCSSクラス -->
             @elseif($item->mine())
-            <!-- この商品が、自分が出品したものだったら -->
             <a href="#" class="btn item__purchase disable" disabled>購入できません</a>
             @else
             <a href="/purchase/{{$item->id}}" class="btn item__purchase">購入手続きへ</a>
@@ -95,7 +88,6 @@
                     @csrf
                     <p class="comment__form-title">商品へのコメント</p>
                     <textarea name="comment" id="comment__textarea" cols="30" rows="10" class="comment__form-textarea"></textarea>
-                    <!-- cols="30" rows="10"：横幅30文字分、縦の行数10行分 -->
                     <div class="form__error">
                         @error('comment')
                         {{$message}}

@@ -10,8 +10,6 @@ class CategoryItem extends Model
     use HasFactory;
 
     protected $table = 'category_items';
-    //テーブル名がモデル名の複数形と異なる場合は、手動でテーブル名を指定する
-    //仮に指定しない場合、category_itemsではなくcategory_itemというテーブルを探してしまう
 
     protected $primaryKey = ['item_id', 'category_id'];
 

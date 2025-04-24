@@ -39,13 +39,9 @@ class DealController extends Controller
             }
         }else {
             if($item->user_id === $user->id && $buyer) {
-            //その商品の出品者と自分が等しい　かつ　商品が買われてる
                 $partner = $buyer->user;
-                //パートナーは購入者
             }elseif($buyer && $buyer->user_id === $user->id) {
-            //商品が買われてる　かつ　購入者と自分が等しい
                 $partner = $item->user;
-                //パートナーは商品の出品者
             }
         }
 

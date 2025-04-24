@@ -18,23 +18,19 @@ use Illuminate\Support\Facades\DB;
 class UserController extends Controller
 {
     public function profile() {
-    //現在ログイン中ユーザーのプロフィール情報を1件取得し、ビューに渡す
         $profile = Profile::where('user_id', Auth::id())->first();
         return view('profile', compact('profile'));
     }
     public function updateProfile(ProfileRequest $request) {
         $img = $request->file('img_url');
         if(isset($img)) {
-        //$imgの結果がnullの可能性があるため、isset()使用（nullの場合put()に渡すとエラーになる）
             $img_url = Storage::disk('local')->put('public/img', $img);
-            //storage/app/public/imgに$imgを保存
         }else {
             $img_url = '';
         }
 
         $profile = Profile::where('user_id', Auth::id())->first();
         if($profile) {
-        //$profileの結果はprofileインスタンスかnullのどちらかしかないのでif文だけでOK
             $profile->update([
                 'user_id' => Auth::id(),
                 'img_url' => $img_url,
@@ -52,7 +48,6 @@ class UserController extends Controller
             ]);
         }
 
-        //名前はprofilesテーブルではなくusersテーブルなので、別で処理
         User::find(Auth::id())->update([
             'name' => $request->name
         ]);

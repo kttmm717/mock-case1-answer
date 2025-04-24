@@ -38,7 +38,6 @@ class User extends Authenticatable
      *
      * @var array<string, string>
      */
-    //datetimeにキャストすることでCarbonインスタンスとして扱えるようになる
     protected $casts = [ 
         'email_verified_at' => 'datetime',
     ];

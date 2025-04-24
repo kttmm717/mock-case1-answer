@@ -48,6 +48,5 @@ class FortifyServiceProvider extends ServiceProvider
         });
         
         app()->bind(FortifyLoginRequest::class, LoginRequest::class);
-        //デフォルトのログイン機能にあるフォームリクエストを自作のものに代替するため、サービスコンテナにバインド
     }
 }

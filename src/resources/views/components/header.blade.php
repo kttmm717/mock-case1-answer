@@ -1,12 +1,10 @@
 <header class="header">
 
-    <!-- ロゴ -->
     <div class="header__logo">
         <a href="/"><img src="{{ asset('img/logo.svg') }}" alt="ロゴ"></a>
     </div>
 
     @if( !in_array(Route::currentRouteName(), ['register', 'login', 'verification.notice']) )
-    <!--現在のルートに[]内の文字列がが含まれていなければ検索フォームを表示するという意味 -->
     <form class="header_search" action="/" method="get">
         @csrf
         <input id="inputElement" class="header_search--input" type="text" name="search" placeholder="なにをお探しですか？">
@@ -15,10 +13,8 @@
         </button>
     </form>
 
-    <!-- ナビゲーションメニュー -->
     <nav class="header__nav">
         <ul>
-            <!-- ログインしている場合はナビゲーションメニュー表示 -->
             @if(Auth::check())
             <li>
                 <form action="/logout" method="post">

@@ -13,9 +13,7 @@ class EmailVerificationRequest extends FormRequest
     public function __construct(StatefulGuard $guard)
     {
         $this->unauthenticated_user = session()->get('unauthenticated_user');
-        //セッションに保存されたユーザー情報を取得して$unauthenticated_userに格納
         $this->guard = $guard;
-        //StatefulGuardの$guardを格納すると後でログインさせる際にguard->loginが使えるようになる
     }
 
     /**
@@ -50,8 +48,6 @@ class EmailVerificationRequest extends FormRequest
     public function fulfill() {
         if(! $this->unauthenticated_user->hasVerifiedEmail()) {
             $this->unauthenticated_user->markEmailAsVerified();
-            //メール認証済みにさせる
-
             $this->guard->login($this->unauthenticated_user);
         }
     }

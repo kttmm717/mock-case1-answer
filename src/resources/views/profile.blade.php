@@ -6,7 +6,6 @@
 <link rel="stylesheet" href="{{ asset('/css/profile.css')  }}">
 @endsection
 
-<!-- 本体 -->
 @section('content')
 
 @include('components.header')
@@ -62,40 +61,19 @@
 <!-- 画像プレビュー機能 -->
 <script>
 const target = document.getElementById('target');
-// id="target"の要素(ここでは<input type="file">)を取得して定数targetに格納
 
 target.addEventListener('change', function (e) {
-// changeイベント(ユーザーがファイルを選択)が発生したとき、処理を実行
-
     const file = e.target.files[0]
-    //イベントが発火した要素の最初のファイルを取得して定数fileに格納
-    
     const reader = new FileReader();
-    // FileReaderオブジェクト作成
-    // ファイルを読み込んでその内容をデータURLに変換するために使用
 
     reader.onload = function (e) {
-    // onloadはファイルの読み込みが完了したときに発火するイベント
-
         const img = document.getElementById("myImage");
-        // id="myImage"の要素を取得して定数imgに格納
-
         console.log(img.src);
-        // 変更前のimgのsrcをログに出力（まだ画像がセットされていないはず）
-
         img.src = e.target.result;
-        // 読み込んだ画像のデータURLをsrcに設定し、画像プレビューを表示
-
         console.log(img.src);
-        // 変更後のimgのsrcをログに出力（新しい画像のデータURLが表示される）
     }
     reader.readAsDataURL(file);
-    // fileをデータURL形式に変換して読み込む
-    // 読み込みが完了するとreader.onloadが発火する
-
 }, false);
-// addEventListenerの第三引数、今回の場合は省略可能
-// イベントの伝播方法を指定するuseCapture（キャプチャフェーズを使用するかどうか）の値
 
 </script>
 @endsection

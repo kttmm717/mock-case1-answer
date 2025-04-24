@@ -42,15 +42,12 @@ class Item extends Model
     // メソッド定義
     public function categories() {
         $categories = $this->categoryItem->map(function($item) {
-        //現在のitemに関連する全てのcategoryItemレコードにアクセス
-        //mapメソッドを使って全てのcategoryItemレコードのコレクションを1つずつループしてcategoryを取り出している
             return $item->category;
         });
         return $categories;
     }
     public function sold() {
         return SoldItem::where('item_id', $this->id)->exists();
-        //クエリの結果が存在するかを確認するメソッド
     }
     public function likeCount() {
         return Like::where('item_id', $this->id)->count();
@@ -64,7 +61,5 @@ class Item extends Model
     }
     public function mine() {
         return $this->user_id == Auth::id();
-        //$this->user_id：この商品を出品したユーザーのID
-        //Auth::id()：現在ログインしているユーザーのID
     }
 }
