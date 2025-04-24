@@ -9,7 +9,7 @@
 @section('content')
 @include('components.header')
 <div class="wrapper">
-    <main>
+    <main class="main">
         <!-- トップ -->
         <div class="top fixed">
             <div class="top__partner--info">

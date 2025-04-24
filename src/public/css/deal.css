@@ -7,7 +7,7 @@
     position: fixed;
     z-index: 10;
 }
-main {
+.main {
     width: 85%;
     position: relative;
 }
