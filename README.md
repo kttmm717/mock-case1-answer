@@ -1,10 +1,23 @@
-# 環境構築
+# フリマアプリ
+## 環境構築
 
 1. Dockerを起動する
 2. プロジェクト直下で、以下のコマンドを実行する
 
 ````
 make init
+````
+3. .envファイルのDB情報変更
+````
+DB_HOSTをmysqlに変更
+DB_DATABASEをlaravel_dbに変更
+DB_USERNAMEをlaravel_userに変更
+DB_PASSWORDをlaravel_passに変更
+````
+4. 以下のコマンド実行
+
+````
+make fresh
 ````
 
 ## メール認証
@@ -32,13 +45,17 @@ https://docs.stripe.com/payments/checkout?locale=ja-JP
 ![alt](er.png)
 
 ## テストアカウント
-name: 一般ユーザー  
+name: 一般ユーザー1  
 email: general1@gmail.com  
-password: password
+password: password123
 ----------------------------
-name: 一般ユーザー  
+name: 一般ユーザー2  
 email: general2@gmail.com  
-password: password
+password: password123
+----------------------------
+name: 一般ユーザー3  
+email: general3@gmail.com  
+password: password123
 ----------------------------
 
 ## PHPunitを利用したテストに関して
