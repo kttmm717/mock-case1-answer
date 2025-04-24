@@ -6,7 +6,6 @@ use Illuminate\Database\Seeder;
 use App\Models\Condition;
 use App\Models\Item;
 use App\Models\Like;
-use Illuminate\Support\Facades\DB;
 
 class ItemsTableSeeder extends Seeder
 {
