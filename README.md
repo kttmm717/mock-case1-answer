@@ -66,3 +66,6 @@ php artisan migrate:fresh --env=testing
 .vendor/bin/phpunit
 ````
 ※.env.testingにもStripeのAPIキーを設定してください。
+
+## その他
+取引チャットは商品購入後に行えます。

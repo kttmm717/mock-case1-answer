@@ -82,7 +82,7 @@ class UserController extends Controller
 
             $items = $buyerItems->merge($sellerItems)
                 ->sortByDesc(function($item) {
-                    return optional($item->messages->sortByDesc('created')->first())->created_at;
+                    return optional($item->messages->sortByDesc('created_at')->first())->created_at;
                 });
         }else {
             $items = Item::where('user_id', $user->id)->get();

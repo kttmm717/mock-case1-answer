@@ -38,6 +38,9 @@ class Item extends Model
     public function messages() {
         return $this->hasMany(Message::class);
     }
+    public function latestMessage() {
+        return $this->hasOne(Message::class)->latestOfMany();
+    }
 
     // メソッド定義
     public function categories() {
@@ -62,4 +65,5 @@ class Item extends Model
     public function mine() {
         return $this->user_id == Auth::id();
     }
+    
 }
