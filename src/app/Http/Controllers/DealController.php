@@ -49,7 +49,7 @@ class DealController extends Controller
             $query->where('user_id', $user->id)
                 ->orWhere('user_id', $partner->id);
         })
-        ->where('buyer_reviewed', false)
+        ->where('seller_reviewed', false)
         ->where('item_id', '!=', $item->id)
         ->get();
 
@@ -118,7 +118,7 @@ class DealController extends Controller
         $message->delete();
         return back();
     }
-    public function update(Request $request, $message_id) {
+    public function update(MessageRequest $request, $message_id) {
         $message = Message::find($message_id);
         $message->update([
             'message' => $request->message,

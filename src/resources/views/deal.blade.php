@@ -104,7 +104,7 @@
                     <form class="edit__form" action="/message/update/{{$message->id}}" method="POST" style="display: none;">
                         @csrf
                         @method('patch')
-                        <textarea class="message__edit" name="message">{{ $message->message }}</textarea>
+                        <textarea class="message__edit" name="message">{{$message->message}}</textarea>
                         <button type="submit">更新</button>
                     </form>
                 </div>
